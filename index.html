@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CM1004K // ACCESS LAYER</title>
+  <link rel="preload" href="./11L-Distorted,_earthquak-1754848264435.mp3" as="audio">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="crt-overlay"></div>
+
+  <header class="bar">
+    <div class="brand">{ CM1004K // ACCESS LAYER: RESTRICTED }</div>
+    <div class="right">
+      <button class="btn" id="soundToggle" aria-pressed="false">SOUND: OFF</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div id="audioHelp" class="audio-help" hidden><pre class="code small">// AUDIO NOTICE: Ses açılamadı. "SOUND: ON" tuşuna bastıktan sonra sayfaya bir kez daha dokun veya dosya adını/konumunu kontrol et. Varsayılan beklenen yol: ./11L-Distorted,_earthquak-1754848264435.mp3</pre></div>
+    <section class="terminal-card">
+      <div class="row">
+        <div class="col">
+          <h1 class="muted">RITUAL-172</h1>
+          <div class="countdown" aria-live="polite">
+            <span class="muted">REQUIRED HOLD</span>
+            <div class="bigtime"><code id="time">02:52</code></div>
+          </div>
+          <div class="progress">
+            <div class="bar" id="bar" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LOCK / HOLD AREA -->
+      <div class="hold-area" id="holdArea" role="button" aria-pressed="false" tabindex="0">
+        <pre class="code" id="holdText">
+&gt;&gt;&gt; HOLD TO STABILIZE // Basılı tut.
+&gt;&gt;&gt; Leave early = RESET.
+        </pre>
+      </div>
+
+      <!-- MESSAGES -->
+      <div class="messages" id="messages" aria-live="polite">
+        <pre class="code small" id="statusLine">
+// TRACE: idle
+        </pre>
+        <pre class="code" id="unlockMessage" hidden>
+// UNLOCK MESSAGE (mevcut mesajın için yer):
+// Burayı kendi mesajınla değiştir. Örn:
+// >>> Kayıt tamamlandı.  Yapı: %92 ayakta.  Anomali: aktif.
+// NOT: İstediğin mesajı app.js içindeki CONFIG.unlockMessage değişkenine de yazabilirsin.
+        </pre>
+      </div>
+
+  <section class="counter-wrap" aria-label="completions">
+    <div class="counter"><code id="completedCount">0</code></div>
+  </section>
+
+</main>
+
+  <audio id="bgAudio" src="./bg.mp3" loop preload="auto" playsinline></audio></audio>
+
+  <script src="./app.js"></script>
+</body>
+</html>
