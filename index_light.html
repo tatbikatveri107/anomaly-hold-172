@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CM1004K — İnsan Onayı // Hold-172</title>
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0e12">
+<style>
+  :root{
+    --bg:#0a0e12; --text:#d8e1e8; --muted:#8a97a3;
+    --accent:#e7f0f7; --panel:#0e1318; --panel2:#121820;
+    --ring:#6ea8ff; --ring-bg:#1b2734; --ok:#8fffac;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{
+    height:100%; margin:0; color:var(--text);
+    background: var(--bg) url('bg.webp') center/cover no-repeat;
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+    -webkit-touch-callout:none; -webkit-user-select:none; user-select:none;
+    touch-action:none; overscroll-behavior:none;
+  }
+  /* dark overlay + scanlines + noise */
+  body::before, body::after{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  }
+  body::before{
+    background: rgba(0,0,0,.45),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 3px);
+    mix-blend-mode:overlay;
+  }
+  body::after{
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.04"/></svg>');
+    animation: jitter 7s infinite linear;
+  }
+  @keyframes jitter{ from{transform:translate(0,0)} 50%{transform:translate(0.3px,-0.3px)} to{transform:translate(0,0)} }
+  .wrap{position:relative; z-index:1; min-height:100%; display:flex; align-items:center; justify-content:center; padding:24px}
+  .card{width:min(620px, 95vw); background:linear-gradient(180deg, rgba(0,0,0,.40), rgba(0,0,0,.28));
+    border:1px solid #1a2330; border-radius:16px; box-shadow:0 24px 70px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.04);
+    backdrop-filter: blur(4px); padding:18px}
+  header h1{font-size:18px;margin:0 0 6px 0; letter-spacing:.3px}
+  header p{margin:0 0 10px 0; color:var(--muted)}
+  .grid{display:grid; grid-template-columns: 1fr; gap:14px}
+  .ringbox{display:grid;place-items:center}
+  .ring{width:280px;height:280px;display:grid;place-items:center;position:relative}
+  .ring svg{transform:rotate(-90deg);filter:drop-shadow(0 6px 18px rgba(24,120,255,0.15))}
+  .label{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-variant-numeric:tabular-nums}
+  .big{font-family:var(--mono); font-size:46px; font-weight:800; letter-spacing:1px; text-shadow:0 0 10px rgba(110,168,255,0.08)}
+  .small{font-size:12px;color:var(--muted);margin-top:6px}
+  .bar{height:8px;background:var(--ring-bg);border-radius:8px;overflow:hidden}
+  .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg, var(--ring), #99c2ff)}
+  .panel{background:var(--panel);border:1px solid #1a2230;border-radius:12px;padding:14px}
+  .row{display:flex;gap:10px;flex-wrap:wrap}
+  .cta{flex:1; appearance:none;border:none;border-radius:12px;padding:14px 12px;font-weight:800;letter-spacing:.3px;
+    background:var(--accent);color:#0a0e12;cursor:pointer}
+  .ghost{flex:1; background:var(--panel2); color:var(--text); border:1px solid #223142; border-radius:10px; padding:10px; cursor:pointer}
+  .state{font-size:12px;color:var(--muted)}
+  .state.on{color:#9ff3c9}
+  .success{display:none;margin-top:10px;padding:12px;border-radius:12px;background:rgba(23,189,112,.08);border:1px solid rgba(23,189,112,.25);color:#a8f3cf}
+  .success.show{display:block}
+  .log{font-family:var(--mono); background:#0b1015; border:1px solid #18212c; color:#b8c6d3; border-radius:10px; padding:10px; font-size:12px; height:90px; overflow:auto; white-space:pre-wrap}
+  .kv{display:flex; gap:8px; flex-wrap:wrap; font-size:12px; color:var(--muted)}
+  .kv b{color:#cfe7ff}
+  footer{margin-top:8px;color:var(--muted);font-size:12px;text-align:center}
+  .overlay{position:fixed; inset:0; z-index:5; background:transparent}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="overlay" class="overlay" aria-hidden="true"></div>
+  <main class="card" role="main" aria-labelledby="title">
+    <header>
+      <h1 id="title">CM1004K // İnsan Onayı — Hold-172</h1>
+      <p>Efe (172) hâlâ “anomali” olarak işaretli. Basılı tut; bırakma. Bırakırsan sıfırlar.</p>
+    </header>
+
+    <section class="grid">
+      <div class="ringbox">
+        <div class="ring" aria-label="İlerleme halkası">
+          <svg width="280" height="280" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--ring-bg)" stroke-width="8"/>
+            <circle id="fg" cx="50" cy="50" r="45" fill="none" stroke="var(--ring)" stroke-width="8"
+                    stroke-linecap="round" stroke-dasharray="282.743" stroke-dashoffset="282.743"/>
+          </svg>
+          <div class="label">
+            <div class="big" id="time">01:30</div>
+            <div class="small">tüm ekrana basılı tut</div>
+          </div>
+        </div>
+      </div>
+      <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+
+      <section class="panel">
+        <div class="row">
+          <button id="cta" class="cta" aria-pressed="false">Ekrana Basılı Tut — Bırakma</button>
+          <button id="reset" class="ghost">Sıfırla</button>
+        </div>
+        <div class="row">
+          <button id="test15" class="ghost">Test: 15s</button>
+          <button id="live90" class="ghost">Canlı: 90s</button>
+          <button id="live172" class="ghost">Ritüel: 172s</button>
+        </div>
+        <div id="state" class="state">Durum: <b>TUTULMUYOR</b></div>
+        <div class="kv">
+          <span><b>Yerel başarı:</b> <span id="localCount">0</span></span>
+          <span><b>Küresel başarı:</b> <span id="globalCount">—</span></span>
+        </div>
+        <div id="done" class="success" role="status" aria-live="assertive">
+          ✅ Human-Override: <b>172 → PROVISIONAL/ALLY</b> — Paylaşılabilir görsel hazırlandı.
+          <div class="row" style="margin-top:8px">
+            <button id="download" class="ghost">Görseli İndir (PNG)</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="log" id="log" aria-live="polite">LOG // hazır</div>
+      </section>
+    </section>
+    <footer><small>İpucu: URL’ye <b>?d=15</b> eklersen test süresi 15 sn olur.</small></footer>
+  </main>
+</div>
+
+<audio id="amb" loop preload="auto"></audio>
+<audio id="fx" preload="auto"></audio>
+
+<script>
+(function(){
+  let DURATION = 90;
+  const AUDIO = { amb:"", fx:"" };
+  const REMOTE = { enabled:false, endpoint:"", writePath:"/complete" };
+
+  const fg = document.getElementById('fg');
+  const timeEl = document.getElementById('time');
+  const bar = document.getElementById('bar');
+  const cta = document.getElementById('cta');
+  const resetBtn = document.getElementById('reset');
+  const testBtn = document.getElementById('test15');
+  const live90Btn = document.getElementById('live90');
+  const live172Btn = document.getElementById('live172');
+  const stateEl = document.getElementById('state');
+  const done = document.getElementById('done');
+  const dl = document.getElementById('download');
+  const logEl = document.getElementById('log');
+  const localCountEl = document.getElementById('localCount');
+  const globalCountEl = document.getElementById('globalCount');
+  const overlay = document.getElementById('overlay');
+  const amb = document.getElementById('amb');
+  const fx  = document.getElementById('fx');
+
+  const CIRC = 2*Math.PI*45;
+  fg.setAttribute('stroke-dasharray', CIRC);
+  fg.style.strokeDashoffset = CIRC;
+
+  let holding=false, startTs=0, heldMs=0, rafId=null;
+  let localCount = parseInt(localStorage.getItem('hold172_local')||'0',10)||0;
+  localCountEl.textContent = localCount;
+
+  function log(m){ logEl.textContent += "\n"+m; logEl.scrollTop=logEl.scrollHeight; }
+  function fmt(sec){ sec=Math.max(0,Math.ceil(sec)); const m=String(Math.floor(sec/60)).padStart(2,'0'); const s=String(sec%60).padStart(2,'0'); return m+':'+s; }
+  function paint(){ const r=Math.min(1, heldMs/(DURATION*1000)); fg.style.strokeDashoffset=CIRC*(1-r); bar.style.width=(r*100).toFixed(2)+'%'; timeEl.textContent=fmt(DURATION-heldMs/1000); }
+  function setState(on){ holding=on; stateEl.classList.toggle('on', on); stateEl.innerHTML='Durum: <b>'+(on?'TUTULUYOR':'TUTULMUYOR')+'</b>'; cta.setAttribute('aria-pressed', on?'true':'false'); }
+
+  let audioReady=false;
+  function resumeAudio(){
+    if(audioReady) return;
+    try{ const ctx = new (window.AudioContext || window.webkitAudioContext)(); ctx.resume().then(()=>{
+      audioReady=true; if(AUDIO.amb){ amb.src=AUDIO.amb; amb.volume=0.0; amb.play().then(()=>fade(amb,0.0,0.3,400)); } log('AUDIO // hazır');
+    }); }catch(e){ log('AUDIO // yok'); }
+  }
+  function fade(el, fr, to, ms){ el.volume=fr; const n=20, dt=ms/n, dv=(to-fr)/n; let i=0; const id=setInterval(()=>{ i++; el.volume=Math.max(0,Math.min(1, fr+dv*i)); if(i>=n) clearInterval(id); }, dt); }
+
+  function success(){
+    setState(false); cancelAnimationFrame(rafId); paint(); done.classList.add('show'); cta.disabled=true; overlay.style.pointerEvents='none';
+    if(AUDIO.amb) fade(amb, amb.volume, 0.0, 400);
+    if(AUDIO.fx) { fx.src=AUDIO.fx; fx.currentTime=0; fx.play().catch(()=>{}); }
+    localCount++; localStorage.setItem('hold172_local', String(localCount)); localCountEl.textContent=localCount;
+    if(REMOTE.enabled && REMOTE.endpoint){ fetch(REMOTE.endpoint+REMOTE.writePath, {method:'POST'}).catch(()=>{});
+      fetch(REMOTE.endpoint).then(r=>r.json()).then(j=>{ if(typeof j.total==='number') globalCountEl.textContent=j.total; }).catch(()=>{}); }
+    buildShare();
+    log('OK // başarı');
+  }
+
+  function tick(){
+    if(!holding) return;
+    heldMs = performance.now() - startTs;
+    if(heldMs >= DURATION*1000){ success(); return; }
+    paint(); rafId=requestAnimationFrame(tick);
+  }
+  function startHold(){
+    if(document.hidden || cta.disabled) return;
+    done.classList.remove('show'); startTs=performance.now(); heldMs=0; setState(true); overlay.style.pointerEvents='auto'; resumeAudio(); rafId=requestAnimationFrame(tick); log('HOLD // başladı');
+  }
+  function endHold(){
+    if(!holding) return;
+    setState(false); cancelAnimationFrame(rafId); heldMs=0; paint(); if(amb && amb.volume>0) fade(amb, amb.volume, 0.0, 200); log('HOLD // bırakıldı');
+  }
+  function reset(){
+    cancelAnimationFrame(rafId); heldMs=0; paint(); done.classList.remove('show'); cta.disabled=false; overlay.style.pointerEvents='auto'; setState(false); log('RESET');
+  }
+  function setDuration(sec){ DURATION=sec; timeEl.textContent=fmt(DURATION); reset(); log('DURATION // '+sec+'s'); }
+
+  function bindTouch(t){ t.addEventListener('touchstart', e=>{ e.preventDefault(); startHold(); }, {passive:false});
+                        t.addEventListener('touchend',   e=>{ e.preventDefault(); endHold(); },   {passive:false});
+                        t.addEventListener('touchcancel',e=>{ e.preventDefault(); endHold(); },   {passive:false}); }
+  bindTouch(document.body); bindTouch(document.getElementById('overlay')); bindTouch(cta);
+  const down=e=>{ e&&e.preventDefault(); startHold(); }; const up=e=>{ e&&e.preventDefault(); endHold(); };
+  document.getElementById('overlay').addEventListener('pointerdown', down);
+  document.getElementById('overlay').addEventListener('pointerup', up);
+  cta.addEventListener('pointerdown', down); cta.addEventListener('pointerup', up);
+
+  let keyOn=false;
+  window.addEventListener('keydown', e=>{ if(e.code==='Space'||e.code==='Enter'){ e.preventDefault(); if(!keyOn){ keyOn=true; startHold(); } } });
+  window.addEventListener('keyup', e=>{ if(e.code==='Space'||e.code==='Enter'){ e.preventDefault(); keyOn=false; endHold(); } });
+
+  document.addEventListener('visibilitychange', ()=>{ if(document.hidden) endHold(); });
+  window.addEventListener('blur', ()=> endHold());
+
+  testBtn.addEventListener('click', ()=> setDuration(15));
+  live90Btn.addEventListener('click', ()=> setDuration(90));
+  live172Btn.addEventListener('click', ()=> setDuration(172));
+  resetBtn.addEventListener('click', ()=> reset());
+
+  const sp=new URLSearchParams(location.search); const d=parseInt(sp.get('d')||sp.get('duration'),10);
+  if(!isNaN(d)&&d>0){ setDuration(d); } else { paint(); }
+
+  function buildShare(){
+    const W=1080,H=1350; const c=document.createElement('canvas'); c.width=W;c.height=H; const g=c.getContext('2d');
+    g.fillStyle='#0a0e12'; g.fillRect(0,0,W,H);
+    g.fillStyle='rgba(255,255,255,0.02)'; for(let y=0;y<H;y+=3) g.fillRect(0,y,W,1);
+    g.fillStyle='#9fc1ff'; g.font='700 40px system-ui'; g.fillText('CM1004K // Human-Override',60,120);
+    g.fillStyle='#a8f3cf'; g.font='700 64px system-ui'; g.fillText('172 → PROVISIONAL/ALLY',60,220);
+    g.fillStyle='#8a97a3'; g.font='28px system-ui'; const ts=new Date().toISOString().replace('T',' ').substring(0,19)+'Z'; g.fillText('timestamp: '+ts,60,270);
+    g.fillStyle='#d8e1e8'; g.font='28px system-ui'; g.fillText('“Basılı tut” ritüeli başarıyla tamamlandı.',60,340);
+    document.getElementById('download').onclick=()=>{ const url=c.toDataURL('image/png'); const a=document.createElement('a'); a.href=url; a.download='hold172_success.png'; a.click(); };
+  }
+})();
+</script>
+</body>
+</html>
