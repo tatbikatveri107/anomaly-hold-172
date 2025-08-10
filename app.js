@@ -13,7 +13,7 @@ const FIREBASE_CONFIG = {
 };
 
 const CONFIG = { holdMs: 40000 }; // 40s
-const PASTEBIN_URL = "https://pastebin.com/wXJaKSF9
+const PASTEBIN_URL = "https://pastebin.com/wXJaKSF9";
 const elHold = document.getElementById('hold');
 const elCount = document.getElementById('count');
 const elTimer = document.getElementById('timer');
