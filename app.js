@@ -1,6 +1,8 @@
+// app.js — en üst (ÇALIŞAN SIRALAMA)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
+// Firebase config (web anahtarı client-side görünür; RTDB kuralları korur)
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyC4QYTj4oKPw4GK-0Gz48m2iHLI-JDre8Q",
   authDomain: "veri107.firebaseapp.com",
@@ -11,15 +13,21 @@ const FIREBASE_CONFIG = {
   appId: "1:672324720558:web:efbb05b275c87e655f5a3f"
 };
 
+// Sayaç süresi ve Pastebin linki
 const CONFIG = { holdMs: 40000 }; // 40s
-const PASTEBIN_URL = "https://pastebin.com/wXJaKSF9";  // <-- düzeltildi
+const PASTEBIN_URL = "https://pastebin.com/wXJaKSF9";
 
-const elHold = document.getElementById('hold');
+// DOM elemanları
+const elHold  = document.getElementById('hold');
 const elCount = document.getElementById('count');
 const elTimer = document.getElementById('timer');
 const bgAudio = document.getElementById('bgAudio');
 const modeHint = document.getElementById('modeHint');
 
+// Pastebin çıktısı için kutu (counter'ın altına eklenir) — ÖNCE TANIMLA!
+const reveal = document.createElement('div');
+reveal.id = 'reveal';
+reveal.hidden = true;
 reveal.style.marginTop = '10px';
 reveal.style.padding = '10px 12px';
 reveal.style.border = '1px solid #155e52';
@@ -27,7 +35,6 @@ reveal.style.borderRadius = '12px';
 reveal.style.background = '#06100f';
 reveal.style.textAlign = 'center';
 reveal.style.fontSize = '14px';
-
 document.querySelector('.counter-wrap').appendChild(reveal);
 
 const KEY_LOCAL = 'ritual_completions_v1';
