@@ -45,3 +45,17 @@ html,body,main,.hold,.title,.counter-wrap,.counter,.timer{
 .counter{font-size:72px;line-height:1;padding:8px 18px;border:1px solid var(--border);border-radius:14px;background:#06100f;min-width:200px;text-align:center}
 .counter-label{opacity:.8;font-size:12px;letter-spacing:2px}
 .hint{opacity:.65;font-size:12px}
+
+/* --- MOBILE SAFETY --- */
+html, body {
+  overscroll-behavior: none;        /* çekince sayfa zıplamasın */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+* { -webkit-tap-highlight-color: transparent; }
+
+.hold {
+  touch-action: none;               /* zoom/scroll devre dışı */
+  -ms-touch-action: none;
+}
