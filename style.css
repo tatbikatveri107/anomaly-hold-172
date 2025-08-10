@@ -1,0 +1,61 @@
+/* Minimal with visible countdown + audio overlay */
+:root{
+  --bg:#0a0c0d;
+  --fg:#a7f3d0;
+  --accent:#34d399;
+  --border:#155e52;
+  --mono: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+html,body,main{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:var(--mono)}
+/* Disable selection & long-press */
+html,body,main,.hold,.title,.counter-wrap,.counter,.timer{
+  -webkit-user-select:none; user-select:none; -webkit-touch-callout:none;
+}
+*{ -webkit-tap-highlight-color: transparent; }
+
+.wrap{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:20px}
+.title{margin:0 0 6px 0;font-weight:600;letter-spacing:2px;opacity:.9}
+
+.timer{
+  font-size:56px; line-height:1; letter-spacing:1px;
+  padding:4px 10px; border:1px solid var(--border); border-radius:12px;
+  background:#06100f; min-width:170px; text-align:center;
+  box-shadow:inset 0 0 40px rgba(15,94,82,.2);
+}
+
+.hold{
+  width:min(92vw,560px);
+  height:200px;
+  border:2px dashed var(--border);
+  border-radius:20px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  background:#06100f;
+  box-shadow:inset 0 0 40px rgba(15,94,82,.2);
+  touch-action:none;
+}
+.hold[aria-pressed="true"]{
+  border-style:solid;
+  box-shadow:inset 0 0 80px rgba(52,211,153,.15);
+}
+.hold-text{font-size:24px;letter-spacing:1px;opacity:.95}
+
+.counter-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:6px}
+.counter{font-size:72px;line-height:1;padding:8px 18px;border:1px solid var(--border);border-radius:14px;background:#06100f;min-width:140px;text-align:center}
+.counter-label{opacity:.8;font-size:12px;letter-spacing:2px}
+
+.btn{
+  background:transparent;border:1px solid #155e52;
+  color:var(--fg);padding:8px 12px;border-radius:10px;
+  cursor:pointer;font-family:var(--mono);
+}
+
+/* Tap-to-enable overlay */
+.tap-overlay{
+  position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,0.75); z-index:50;
+}
+.tap-box{ background:#061413; border:1px solid #0d453b; border-radius:16px; padding:16px; width:min(92vw,420px); box-shadow:0 10px 40px rgba(0,0,0,0.5); }
+.code{ font-family:var(--mono); white-space:pre-wrap; margin:0 0 12px 0; }
