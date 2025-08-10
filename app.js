@@ -1,11 +1,10 @@
-// app.js — en üst
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyC4QYTj4oKPw4GK-0Gz48m2iHLI-JDre8Q",
   authDomain: "veri107.firebaseapp.com",
-  databaseURL: "https://veri107-default-rtdb.firebaseio.com", // <— slash yok
+  databaseURL: "https://veri107-default-rtdb.firebaseio.com",
   projectId: "veri107",
   storageBucket: "veri107.firebasestorage.app",
   messagingSenderId: "672324720558",
@@ -13,16 +12,14 @@ const FIREBASE_CONFIG = {
 };
 
 const CONFIG = { holdMs: 40000 }; // 40s
-const PASTEBIN_URL = "https://pastebin.com/wXJaKSF9";
+const PASTEBIN_URL = "https://pastebin.com/wXJaKSF9";  // <-- düzeltildi
+
 const elHold = document.getElementById('hold');
 const elCount = document.getElementById('count');
 const elTimer = document.getElementById('timer');
 const bgAudio = document.getElementById('bgAudio');
 const modeHint = document.getElementById('modeHint');
-// Pastebin çıktısı için kutu (counter'ın altına eklenir)
-const reveal = document.createElement('div');
-reveal.id = 'reveal';
-reveal.hidden = true;
+
 reveal.style.marginTop = '10px';
 reveal.style.padding = '10px 12px';
 reveal.style.border = '1px solid #155e52';
