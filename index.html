@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ritual</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <!-- Audio in same folder, exact filename -->
+  <audio id="bgAudio" src="./11L-Distorted,_earthquak-1754848264435.mp3" loop preload="auto" playsinline></audio>
+
+  <main class="wrap">
+    <h1 class="title">RITUAL</h1>
+
+    <div class="timer" id="timer">00:40</div>
+
+    <div class="hold" id="hold" role="button" aria-pressed="false" tabindex="0">
+      <div class="hold-text">BASILI TUT</div>
+    </div>
+
+    <div class="counter-wrap" aria-label="tamamlayan sayısı">
+      <div class="counter" id="count">0</div>
+      <div class="counter-label">TOPLAM TAMAMLAYAN (GLOBAL)</div>
+      <div class="hint" id="modeHint"></div>
+    </div>
+  </main>
+
+  <!-- App (module) -->
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
