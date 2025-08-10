@@ -1,21 +1,18 @@
-// GLOBAL counter via Firebase RTDB (fallback local) + 40s timer + auto audio unlock
+// app.js — en üst
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-const CONFIG = { holdMs: 40000 }; // 40,000 ms = 40s
-
-// 1) FILL THESE BEFORE DEPLOY (Firebase console → Project settings → SDK setup & config)
 const FIREBASE_CONFIG = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
-  projectId: "YOUR_PROJECT",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyC4QYTj4oKPw4GK-0Gz48m2iHLI-JDre8Q",
+  authDomain: "veri107.firebaseapp.com",
+  databaseURL: "https://veri107-default-rtdb.firebaseio.com", // <— slash yok
+  projectId: "veri107",
+  storageBucket: "veri107.firebasestorage.app",
+  messagingSenderId: "672324720558",
+  appId: "1:672324720558:web:efbb05b275c87e655f5a3f"
 };
-// If left as-is (YOUR_*), app will fall back to LOCAL-ONLY mode.
 
+const CONFIG = { holdMs: 40000 }; // 40s
 const elHold = document.getElementById('hold');
 const elCount = document.getElementById('count');
 const elTimer = document.getElementById('timer');
