@@ -1,7 +1,7 @@
 /* Config + Logic */
 const CONFIG = {
   webhookUrl: null,
-  holdMs: 172000, // 172 seconds
+  holdMs: 90000, // 90 seconds
   // Mevcut sitedeki “kilit” kutusu mesajlarını bozmamak için, sadece durum satırını güncelliyoruz.
   unlockMessage: "", // İstersen buraya kendi mesajını gir. Boşsa HTML'deki #unlockMessage gösterilir.
 };
