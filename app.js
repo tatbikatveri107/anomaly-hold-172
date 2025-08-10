@@ -13,11 +13,25 @@ const FIREBASE_CONFIG = {
 };
 
 const CONFIG = { holdMs: 40000 }; // 40s
+const PASTEBIN_URL = "https://pastebin.com/wXJaKSF9
 const elHold = document.getElementById('hold');
 const elCount = document.getElementById('count');
 const elTimer = document.getElementById('timer');
 const bgAudio = document.getElementById('bgAudio');
 const modeHint = document.getElementById('modeHint');
+// Pastebin çıktısı için kutu (counter'ın altına eklenir)
+const reveal = document.createElement('div');
+reveal.id = 'reveal';
+reveal.hidden = true;
+reveal.style.marginTop = '10px';
+reveal.style.padding = '10px 12px';
+reveal.style.border = '1px solid #155e52';
+reveal.style.borderRadius = '12px';
+reveal.style.background = '#06100f';
+reveal.style.textAlign = 'center';
+reveal.style.fontSize = '14px';
+
+document.querySelector('.counter-wrap').appendChild(reveal);
 
 const KEY_LOCAL = 'ritual_completions_v1';
 let useFirebase = !Object.values(FIREBASE_CONFIG).some(v => typeof v === 'string' && v.startsWith("YOUR_"));
@@ -63,6 +77,7 @@ resetTimer();
 
 function holdStart(){
   if (holding) return;
+  reveal.hidden = true;        // <<< kutuyu her tur başında gizle
   holding = true;
   startTs = performance.now();
   elHold.setAttribute('aria-pressed','true');
@@ -92,7 +107,17 @@ async function complete(){
   } else {
     const n = loadLocal()+1; saveLocal(n); elCount.textContent = String(n);
   }
-  resetTimer();
+ resetTimer();
+
+// Geri sayım tamamlandı → Pastebin linkini göster
+if (PASTEBIN_URL) {
+  reveal.innerHTML =
+    'ACCESS GRANTED<br><a href="' + PASTEBIN_URL +
+    '" target="_blank" rel="noopener">Pastebin bağlantısı</a>';
+  reveal.hidden = false;
+}
+
+  
 }
 
 function tick(){
