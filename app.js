@@ -15,7 +15,7 @@ const FIREBASE_CONFIG = {
 };
 
 // Sayaç süresi ve Pastebin linki
-const CONFIG = { holdMs: 40000 }; // 40s
+const CONFIG = { holdMs: 20000 }; // 20s
 const PASTEBIN_URL = "https://pastebin.com/hK8Ccqk8";
 
 // DOM elemanları
