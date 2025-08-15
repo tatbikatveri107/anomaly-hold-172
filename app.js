@@ -1,4 +1,4 @@
-// app.js (tam sürüm) — 40s hold, global sayaç (Firebase), otomatik ses, Pastebin reveal
+// app.js (tam sürüm) — 20s hold, global sayaç (Firebase), otomatik ses, Pastebin reveal
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
