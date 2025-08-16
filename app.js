@@ -1,3 +1,8 @@
+//DELİRDİK
+//DELİRDİK
+//DELİRDİK
+
+
 // app.js (tam sürüm) — 20s hold, global sayaç (Firebase), otomatik ses, Pastebin reveal
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
